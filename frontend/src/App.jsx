@@ -2,7 +2,7 @@
 import { Link, Navigate, NavLink, Outlet, Route, Routes, useLocation, useNavigate, useOutletContext } from 'react-router'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
-import { ArrowRight, CalendarDays, CheckSquare, FolderKanban, Home, LogOut, Plus, Settings as SettingsIcon, Sparkles } from 'lucide-react'
+import { ArrowRight, Building2, CalendarDays, CheckSquare, FolderKanban, Home, Plus, Settings as SettingsIcon, Sparkles } from 'lucide-react'
 import './App.css'
 
 const AuthScreen = lazy(() => import('./components/AuthScreen.jsx'))
@@ -12,6 +12,7 @@ const pages = {
   tasks: lazy(() => import('./pages/Tasks.jsx')),
   calendar: lazy(() => import('./pages/Calendar.jsx')),
   settings: lazy(() => import('./pages/Settings.jsx')),
+  profile: lazy(() => import('./pages/Profile.jsx')),
   workspaces: lazy(() => import('./pages/WorkspaceScreen.jsx')),
 }
 
@@ -20,8 +21,9 @@ const navigation = [
   { id: 'projects', label: 'Projects', icon: FolderKanban, badge: '6' },
   { id: 'tasks', label: 'My tasks', icon: CheckSquare, badge: '4' },
   { id: 'calendar', label: 'Calendar', icon: CalendarDays },
+  { id: 'workspaces', label: 'Workspaces', icon: Building2 },
 ]
-const pageLabels = Object.fromEntries([...navigation, { id: 'settings', label: 'Settings' }, { id: 'workspaces', label: 'Workspaces' }].map((item) => [item.id, item.label]))
+const pageLabels = Object.fromEntries([...navigation, { id: 'settings', label: 'Settings' }, { id: 'profile', label: 'Profile' }].map((item) => [item.id, item.label]))
 
 class PageErrorBoundary extends Component {
   state = { error: null }
@@ -73,7 +75,7 @@ function AuthenticatedLayout({ currentUser, activeWorkspace, onWorkspaceSelected
 
   return (
     <div className={'app-shell ' + (sidebarOpen ? '' : 'sidebar-collapsed')}>
-      <Header currentUser={currentUser} activeWorkspace={activeWorkspace} onToggleSidebar={onToggleSidebar} theme={theme} onToggleTheme={onToggleTheme} />
+      <Header currentUser={currentUser} activeWorkspace={activeWorkspace} onWorkspaceSelected={onWorkspaceSelected} onLogout={onLogout} onToggleSidebar={onToggleSidebar} theme={theme} onToggleTheme={onToggleTheme} />
       <aside className="sidebar">
         <div className="sidebar-scroll">
           <p className="nav-label">WORKSPACE</p>
@@ -90,7 +92,6 @@ function AuthenticatedLayout({ currentUser, activeWorkspace, onWorkspaceSelected
           <div className="upgrade-card"><div className="upgrade-sparkle"><Sparkles size={16} /></div><strong>Make work flow</strong><p>Bring your team together and get more done.</p><Link to="/workspaces">Manage workspaces <ArrowRight size={14} /></Link></div>
           <NavLink className={({ isActive }) => 'nav-item settings-link ' + (isActive ? 'active' : '')} to="/settings" title="Settings"><SettingsIcon className="nav-icon" size={17} strokeWidth={1.8} /><span className="nav-text">Settings</span></NavLink>
         </div>
-        <div className="sidebar-user"><span className="avatar avatar-you">{currentUser.name.split(/\s+/).map((part) => part[0]).join('').slice(0, 2).toUpperCase()}</span><span className="user-details"><strong>{currentUser.name}</strong><small>{currentUser.email}</small></span><button className="user-more" onClick={onLogout} aria-label="Sign out" title="Sign out"><LogOut size={16} /></button></div>
       </aside>
 
       <main className="main-area">
@@ -223,6 +224,7 @@ function App() {
         <Route path="tasks" element={<RoutedPage pageId="tasks" />} />
         <Route path="calendar" element={<RoutedPage pageId="calendar" />} />
         <Route path="settings" element={<RoutedPage pageId="settings" />} />
+        <Route path="profile" element={<RoutedPage pageId="profile" />} />
         <Route path="*" element={<Navigate to="/workspaces" replace />} />
       </Route>
     </Routes>

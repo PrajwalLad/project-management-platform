@@ -193,6 +193,64 @@ h1, .panel-heading h2, .project-card h2, .calendar-heading h2, .settings-form h2
 .workspace-switcher { text-decoration: none; }
 .workspace-switcher:hover { text-decoration: none; }
 
+.workspace-menu-wrap, .profile-menu-wrap { position: relative; }
+.workspace-switcher { margin-left: 18px; padding: 8px 12px; color: var(--color-text-secondary); background: var(--color-surface-alt); }
+.workspace-switcher:hover { background: var(--color-surface-hover); }
+.workspace-avatar { flex: 0 0 auto; background: var(--color-primary-soft); color: var(--color-primary-text); }
+.workspace-popover, .profile-popover { position: absolute; top: calc(100% + 11px); z-index: 40; overflow: hidden; border: 1px solid var(--color-border); border-radius: 11px; background: var(--color-surface); box-shadow: var(--shadow-popover); color: var(--color-text); }
+.workspace-popover { left: 18px; width: min(320px, calc(100vw - 24px)); padding: 8px; }
+.popover-heading { display: block; padding: 9px 10px 8px; color: var(--color-text-muted); font-size: 12px; font-weight: 700; }
+.workspace-option { width: 100%; display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; border-radius: 7px; background: transparent; color: var(--color-text); text-align: left; cursor: pointer; }
+.workspace-option:hover, .profile-popover a:hover, .profile-popover button:hover { background: var(--color-surface-hover); }
+.workspace-option-copy { min-width: 0; display: flex; flex: 1; flex-direction: column; gap: 2px; }
+.workspace-option-copy strong { overflow: hidden; color: var(--color-heading); font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.workspace-option-copy small, .popover-empty { color: var(--color-text-muted); font-size: 12px; }
+.popover-empty { margin: 0; padding: 10px; }
+.workspace-manage-link { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; padding: 10px; border-top: 1px solid var(--color-border-soft); color: var(--color-primary-text); font-size: 13px; font-weight: 600; text-decoration: none; }
+.manage-link-arrow { transform: rotate(-90deg); }
+.profile-popover { right: 0; width: 260px; padding: 8px; }
+.profile-popover-user { display: flex; align-items: center; gap: 10px; padding: 8px 8px 12px; border-bottom: 1px solid var(--color-border-soft); }
+.profile-popover-user > span:last-child { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.profile-popover-user strong { overflow: hidden; color: var(--color-heading); font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.profile-popover-user small { overflow: hidden; color: var(--color-text-muted); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.profile-popover > a, .profile-popover > button { width: 100%; display: flex; align-items: center; gap: 10px; padding: 10px 8px; border: 0; border-radius: 7px; background: transparent; color: var(--color-text-secondary); font: inherit; font-size: 14px; text-align: left; text-decoration: none; cursor: pointer; }
+.profile-popover > button { color: var(--color-danger); }
+.profile-page { max-width: 850px; }
+.profile-summary-card { display: flex; align-items: center; gap: 20px; padding: 24px; }
+.profile-large-avatar { width: 68px; height: 68px; display: grid; flex: 0 0 auto; place-items: center; border-radius: 50%; background: var(--color-primary); color: white; font-size: 24px; font-weight: 700; }
+.profile-summary-copy h2 { margin: 7px 0 2px; color: var(--color-heading); font-size: 22px; }
+.profile-summary-copy p { margin: 0; color: var(--color-text-muted); font-size: 14px; }
+.profile-card-label { display: flex; align-items: center; gap: 6px; color: var(--color-primary-text); font-size: 11px; font-weight: 700; letter-spacing: .6px; }
+.profile-details-card { margin-top: 18px; padding: 21px 24px 8px; }
+.profile-section-heading { padding-bottom: 13px; border-bottom: 1px solid var(--color-border-soft); }
+.profile-section-heading h2 { margin: 0; color: var(--color-heading); font-size: 17px; }
+.profile-section-heading p { margin: 4px 0 0; color: var(--color-text-muted); font-size: 13px; }
+.profile-detail-row { display: flex; align-items: center; gap: 12px; min-height: 64px; border-bottom: 1px solid var(--color-border-soft); }
+.profile-detail-row:last-child { border-bottom: 0; }
+.profile-detail-icon { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 8px; background: var(--color-primary-soft); color: var(--color-primary-text); }
+.profile-detail-row > span:last-child { display: flex; flex-direction: column; gap: 2px; }
+.profile-detail-row small { color: var(--color-text-muted); font-size: 12px; }
+.profile-detail-row strong { color: var(--color-heading); font-size: 14px; font-weight: 600; }
+.workspace-actions-heading { margin: 25px 0 11px; }
+.workspace-actions-heading h2 { margin: 0; color: var(--color-heading); font-size: 17px; }
+.workspace-actions-heading p { margin: 4px 0 0; color: var(--color-text-muted); font-size: 13px; }
+.existing-workspaces { margin-top: 0; }
+.workspace-switcher .chevron { display: inline-block !important; }
+
+@media (max-width: 800px) {
+  .workspace-switcher { margin-left: 6px; padding: 7px; }
+  .workspace-switcher-name { display: none; }
+  .workspace-popover { left: 0; }
+}
+@media (max-width: 560px) {
+  .workspace-switcher { margin-left: 0; padding: 6px; }
+  .profile-chevron { display: inline-block; }
+  .profile-popover { right: -3px; }
+  .profile-summary-card { gap: 14px; padding: 18px; }
+  .profile-large-avatar { width: 56px; height: 56px; font-size: 20px; }
+  .profile-details-card { padding: 17px 16px 6px; }
+}
+
 /* Readable sizing and shared icon/avatar treatment at standard display scaling. */
 .brand, .brand-mark, h1, .stat-card > strong, .panel-heading h2, .project-card h2, .calendar-heading h2, .settings-form h2 { font-family: 'Source Sans 3', 'Segoe UI', sans-serif; }
 .avatar-you { border: 1px solid var(--color-border); background: var(--color-primary); color: #fff; box-shadow: none; font-size: 11px; font-weight: 700; }

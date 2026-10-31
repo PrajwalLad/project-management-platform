@@ -72,9 +72,24 @@ function WorkspaceScreen({ user, onMembershipAdded, onWorkspaceSelected }) {
     <section className="page-content workspace-page">
       <div className="workspace-welcome">
         <p className="eyebrow">YOUR TEAM SPACE</p>
-        <h1>Where should we start?</h1>
-        <p className="page-subtitle">Create a space for your team or join one with an invite code.</p>
+        <h1>Your workspaces</h1>
+        <p className="page-subtitle">Open a workspace, or create and join spaces for your teams.</p>
       </div>
+
+      <section className="existing-workspaces">
+        <div className="existing-heading"><div><h2>Your workspaces</h2><p>Choose a workspace to continue.</p></div><span>{workspaces.length}</span></div>
+        {loading ? <div className="workspace-list-loading"><span className="loading-spinner" />Loading workspaces...</div> : workspaces.length === 0 ? (
+          <div className="workspace-empty">You’re not a member of a workspace yet. Create one or join with an invite code below.</div>
+        ) : (
+          <div className="workspace-list">{workspaces.map((workspace) => <article className="workspace-list-card" key={workspace.id}>
+            <span className="workspace-list-mark">{workspace.name.slice(0, 1).toUpperCase()}</span>
+            <div className="workspace-list-copy"><strong>{workspace.name}</strong><small>{workspace.role} {workspace.inviteCode ? '· Invite code: ' + workspace.inviteCode : ''}</small></div>
+            <button className="open-workspace-button" onClick={() => onWorkspaceSelected(workspace)}>Open workspace <ArrowRight size={14} /></button>
+          </article>)}</div>
+        )}
+      </section>
+
+      <div className="workspace-actions-heading"><h2>More workspace options</h2><p>Create a new workspace or join one with an invite code.</p></div>
 
       <div className="workspace-choice-grid">
         <article className="workspace-choice-card create-choice">
@@ -104,18 +119,6 @@ function WorkspaceScreen({ user, onMembershipAdded, onWorkspaceSelected }) {
 
       {(error || notice) && <p className={error ? 'workspace-message workspace-error' : 'workspace-message workspace-success'} role="status">{error || notice}</p>}
 
-      <section className="existing-workspaces">
-        <div className="existing-heading"><div><h2>Your workspaces</h2><p>Select a workspace to open your projects.</p></div><span>{workspaces.length}</span></div>
-        {loading ? <div className="workspace-list-loading"><span className="loading-spinner" />Loading workspaces...</div> : workspaces.length === 0 ? (
-          <div className="workspace-empty">You’re not a member of a workspace yet. Create one or join with an invite code above.</div>
-        ) : (
-          <div className="workspace-list">{workspaces.map((workspace) => <article className="workspace-list-card" key={workspace.id}>
-            <span className="workspace-list-mark">{workspace.name.slice(0, 1).toUpperCase()}</span>
-            <div className="workspace-list-copy"><strong>{workspace.name}</strong><small>{workspace.role} {workspace.inviteCode ? '· Invite code: ' + workspace.inviteCode : ''}</small></div>
-            <button className="open-workspace-button" onClick={() => onWorkspaceSelected(workspace)}>Open workspace <ArrowRight size={14} /></button>
-          </article>)}</div>
-        )}
-      </section>
       <p className="workspace-signed-in">Signed in as <strong>{user.name}</strong></p>
     </section>
   )
