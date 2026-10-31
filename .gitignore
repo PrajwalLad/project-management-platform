@@ -1,0 +1,69 @@
+# Environment variables and credentials
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+.secrets/
+**/.secrets/
+*.pem
+*.key
+*.p12
+*.pfx
+*.credentials
+credentials.json
+service-account*.json
+
+# Personal planning and local notes
+/Tasks.txt
+/tasks.txt
+**/Tasks.txt
+**/tasks.txt
+*.local
+*.local.*
+
+# Dependencies and package-manager caches
+**/node_modules/
+.npm/
+.pnpm-store/
+
+# Build output, caches, and test artifacts
+**/dist/
+**/build/
+**/coverage/
+**/.vite/
+**/.cache/
+**/out/
+
+# Runtime logs and process files
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.pid
+*.seed
+
+# Local databases, dumps, and uploaded runtime files
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.backup
+*.sql.gz
+/backend/uploads/
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editors and local workspace state
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.user
+*.sln
+*.sw?
+*.code-workspace
